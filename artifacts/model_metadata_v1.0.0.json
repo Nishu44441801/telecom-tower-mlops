@@ -1,7 +1,6 @@
 {
-  "model_name": "TelecomTowerFailureClassifier",
+  "model_name": "TowerFailurePredictor",
   "version": "v1.0.0",
-  "algorithm": "HistGradientBoostingClassifier",
   "features": [
     "Temperature_C",
     "Battery_Voltage",
@@ -19,17 +18,17 @@
   ],
   "threshold": 0.5,
   "metrics": {
-    "cv_roc_auc_mean": 0.8679789473684212,
-    "cv_pr_auc_mean": 0.6731557515169747,
-    "test_roc_auc": 0.779818378964489,
-    "test_pr_auc": 0.5014371143147439,
-    "test_f1": 0.5354330708661418,
+    "cv_roc_auc_mean": 0.8608631578947368,
+    "cv_pr_auc_mean": 0.6517122434497864,
+    "test_roc_auc": 0.8052317701274058,
+    "test_pr_auc": 0.5880130576378343,
+    "test_f1": 0.5573770491803278,
     "test_recall": 0.5483870967741935,
     "optimal_threshold": 0.5,
     "confusion_matrix": [
       [
-        207,
-        31
+        212,
+        26
       ],
       [
         28,
@@ -37,5 +36,5 @@
       ]
     ]
   },
-  "created_by": "Group 3 (Nishant & Bitu)"
+  "team": "Group 3 (Nishant & Bitu)"
 }

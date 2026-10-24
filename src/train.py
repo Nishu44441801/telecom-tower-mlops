@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timezone
 from sklearn.model_selection import StratifiedKFold, train_test_split
-from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import (
     roc_auc_score,
     average_precision_score,
@@ -44,13 +44,12 @@ def run_training():
     X_tr = pipe.transform(X_train)
     X_te = pipe.transform(X_test)
 
-    # HistGradientBoosting handles tabular data well and runs fast at inference
-    # class_weight='balanced' accounts for 20.8% failure imbalance
-    clf = HistGradientBoostingClassifier(
-        max_iter=150,
-        learning_rate=0.08,
-        max_depth=5,
-        min_samples_leaf=20,
+    # RandomForestClassifier pickles cleanly across different scikit-learn versions
+    # and handles tabular class imbalance with class_weight='balanced'
+    clf = RandomForestClassifier(
+        n_estimators=100,
+        max_depth=8,
+        min_samples_leaf=4,
         class_weight="balanced",
         random_state=42,
     )
