@@ -1,0 +1,41 @@
+{
+  "model_name": "TelecomTowerFailureClassifier",
+  "version": "v1.0.0",
+  "algorithm": "HistGradientBoostingClassifier",
+  "features": [
+    "Temperature_C",
+    "Battery_Voltage",
+    "Power_Consumption_W",
+    "Signal_Strength_Percent",
+    "Fan_Speed_RPM",
+    "Humidity_Percent",
+    "Traffic_Load",
+    "Tower_Age_Years",
+    "Thermal_Stress_Ratio",
+    "Power_Per_Traffic",
+    "Battery_Voltage_Dev48",
+    "Heat_Humidity_Index",
+    "Aging_Power_Stress"
+  ],
+  "threshold": 0.5,
+  "metrics": {
+    "cv_roc_auc_mean": 0.8679789473684212,
+    "cv_pr_auc_mean": 0.6731557515169747,
+    "test_roc_auc": 0.779818378964489,
+    "test_pr_auc": 0.5014371143147439,
+    "test_f1": 0.5354330708661418,
+    "test_recall": 0.5483870967741935,
+    "optimal_threshold": 0.5,
+    "confusion_matrix": [
+      [
+        207,
+        31
+      ],
+      [
+        28,
+        34
+      ]
+    ]
+  },
+  "created_by": "Group 3 (Nishant & Bitu)"
+}

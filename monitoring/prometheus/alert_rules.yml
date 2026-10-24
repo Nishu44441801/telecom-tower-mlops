@@ -1,0 +1,37 @@
+groups:
+  - name: telecom_tower_service_alerts
+    rules:
+      # Alert 1: High Latency Warning (p95 latency exceeds 150ms over 30s)
+      # Defended in Task 8 against looser/tighter thresholds
+      - alert: HighInferenceLatencyP95
+        expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{endpoint="/predict"}[30s])) by (le)) > 0.150
+        for: 15s
+        labels:
+          severity: warning
+          team: mlops-oncall
+        annotations:
+          summary: "Telecom Tower Prediction latency p95 > 150ms"
+          description: "The 95th percentile inference latency is {{ $value }}s on endpoint /predict, exceeding the 150ms SLA."
+
+      # Alert 2: Prediction Service Elevated Error Rate (5xx or 4xx failure rate > 5%)
+      # Defended in Task 8
+      - alert: HighServiceErrorRate
+        expr: (sum(rate(http_requests_total{status=~"[45].."}[1m])) / sum(rate(http_requests_total[1m]))) > 0.05
+        for: 20s
+        labels:
+          severity: critical
+          team: mlops-oncall
+        annotations:
+          summary: "Service error rate exceeds 5%"
+          description: "Elevated HTTP failure rate detected (current: {{ $value | humanizePercentage }}). Check container logs or ingress payload."
+
+      # Alert 3: Anomaly in Tower Failure Surge (Share of failing towers exceeds 40%)
+      - alert: AbnormalTowerFailureSurge
+        expr: tower_failure_prediction_ratio > 0.40
+        for: 30s
+        labels:
+          severity: warning
+          team: field-operations
+        annotations:
+          summary: "Tower failure prediction surge detected"
+          description: "Over 40% of evaluated towers are predicted to fail within 48h (baseline is ~20.8%). Potential severe storm or regional grid event."

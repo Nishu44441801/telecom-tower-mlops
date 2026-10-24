@@ -1,0 +1,4 @@
+Scenario,Concurrent Users,Total Requests,Throughput (req/s),p50 Latency (ms),p95 Latency (ms),p99 Latency (ms),Error Rate (%)
+Scenario 1: Baseline Load,10,470,38.4,227.5,284.13,327.64,0.0
+Scenario 2: Peak Operating Load,100,565,30.8,3223.96,3804.15,3871.17,0.0
+Scenario 3: Stress Spike (Breaking Test),500,2115,92.6,4013.02,6017.12,6029.84,96.69
